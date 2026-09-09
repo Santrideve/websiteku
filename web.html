@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santri Developer - Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Typed.js (Untuk Efek Ketik Otomatis) -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: "Open Sans", sans-serif; color: #272829; background-color: #fff; line-height: 1.6; }
+        a { color: #149ddd; text-decoration: none; transition: 0.3s; }
+        a:hover { color: #37b3ed; }
+        h1, h2, h3, h4, h5, h6 { font-family: "Raleway", sans-serif; }
+
+        /* SIDEBAR NAVIGATION */
+        #header { position: fixed; top: 0; left: 0; bottom: 0; width: 300px; transition: all ease-in-out 0.5s; z-index: 9997; padding: 0 15px; background: #040b14; overflow-y: auto; }
+        #header .profile img { margin: 15px auto; display: block; width: 120px; height: 120px; border-radius: 50%; border: 8px solid #2c2f3f; object-fit: cover; }
+        #header .profile h1 { font-size: 24px; margin: 0; padding: 0; font-weight: 600; text-align: center; color: #fff; }
+        #header .profile .social-links { margin-top: 15px; text-align: center; }
+        #header .profile .social-links a { font-size: 16px; display: inline-block; background: #212431; color: #fff; line-height: 1; padding: 10px 0; margin-right: 4px; border-radius: 50%; text-align: center; width: 36px; height: 36px; transition: 0.3s; }
+        #header .profile .social-links a:hover { background: #149ddd; }
+
+        .nav-menu { padding: 20px 0 0 0; }
+        .nav-menu * { margin: 0; padding: 0; list-style: none; }
+        .nav-menu a { display: flex; align-items: center; color: #a8a9b4; padding: 12px 15px; margin-bottom: 8px; transition: 0.3s; font-size: 15px; border-radius: 4px; }
+        .nav-menu a i { font-size: 18px; padding-right: 15px; color: #6c757d; }
+        .nav-menu a:hover, .nav-menu a.active { color: #fff; }
+        .nav-menu a:hover i, .nav-menu a.active i { color: #149ddd; }
+
+        .mobile-nav-toggle { position: fixed; right: 15px; top: 15px; z-index: 9998; border: 0; font-size: 20px; background-color: #149ddd; color: #fff; width: 40px; height: 40px; display: none; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; }
+
+        /* MAIN & SECTIONS */
+        #main { margin-left: 300px; }
+        section { padding: 60px 0; }
+        .section-bg { background: #f5f8fd; }
+        .container { padding: 0 30px; }
+        .section-title { padding-bottom: 30px; }
+        .section-title h2 { font-size: 32px; font-weight: bold; margin-bottom: 20px; padding-bottom: 20px; position: relative; color: #172b4d; }
+        .section-title h2::after { content: ''; position: absolute; display: block; width: 50px; height: 3px; background: #149ddd; bottom: 0; left: 0; }
+
+        /* HERO DINAMIS & FOTO PROFIL LINGKARAN */
+        #hero { width: 100%; height: 100vh; background: url('foto.jpg') center center / cover no-repeat; position: relative; }
+        #hero:before { content: ""; background: rgba(5, 13, 24, 0.75); position: absolute; inset: 0; z-index: 1; }
+        #hero .hero-container { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center; height: 100%; padding-left: 320px; }
+        
+        /* GAYA FOTO PROFIL HERO */
+        .hero-profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #149ddd;
+            box-shadow: 0 0 25px rgba(20, 157, 221, 0.5);
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .hero-profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(20, 157, 221, 0.8);
+        }
+
+        #hero h1 { font-size: 56px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        #hero p { color: #fff; font-size: 24px; margin-bottom: 20px; font-family: "Poppins", sans-serif; }
+        #hero p span { border-bottom: 3px solid #149ddd; color: #149ddd; font-weight: 600; }
+
+        .tag-cloud { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        .tag-badge { background: rgba(20, 157, 221, 0.2); border: 1px solid #149ddd; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+
+        /* ABOUT */
+        .about .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 25px 0; }
+        .about .info-item { display: flex; align-items: center; font-size: 15px; }
+        .about .info-item i { color: #149ddd; margin-right: 10px; font-size: 16px; }
+
+        /* STATS COUNTER */
+        .facts { padding-bottom: 30px; }
+        .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+        .fact-box { background: #fff; padding: 25px 20px; border-radius: 8px; text-align: center; box-shadow: 0px 5px 25px rgba(0,0,0,0.05); }
+        .fact-box i { font-size: 36px; color: #149ddd; margin-bottom: 10px; }
+        .fact-box .counter { font-size: 32px; font-weight: 700; color: #050d18; display: inline-block; }
+        .fact-box p { font-size: 13px; color: #666; margin: 0; }
+
+        /* SERVICES */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .icon-box { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 0 25px rgba(0,0,0,0.05); transition: 0.3s; }
+        .icon-box:hover { transform: translateY(-5px); }
+        .icon-box .icon { width: 50px; height: 50px; background: #149ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; color: #fff; font-size: 20px; }
+        .icon-box h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+        .icon-box p { font-size: 14px; color: #666; }
+
+        /* SKILLS */
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .skills .progress { margin-bottom: 15px; }
+        .skills .skill { font-weight: 600; text-transform: uppercase; font-size: 12px; display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .skills .progress-bar-wrap { background: #dce8f8; height: 10px; border-radius: 5px; }
+        .skills .progress-bar { width: 0; height: 100%; background: #149ddd; border-radius: 5px; transition: 1.2s ease-in-out; }
+
+        /* PROJECTS */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .portfolio-item { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 25px rgba(0,0,0,0.08); transition: 0.3s; }
+        .portfolio-item:hover { transform: translateY(-8px); }
+        .portfolio-img { height: 180px; background-size: cover; background-position: center; transition: 0.4s; }
+        .portfolio-item:hover .portfolio-img { transform: scale(1.05); }
+        .portfolio-info { padding: 20px; }
+
+        /* CONTACT */
+        .contact .info-box { display: flex; align-items: center; padding: 20px; background: #fff; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.04); }
+        .contact .info-box i { font-size: 20px; color: #149ddd; background: #dff3fc; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 15px; }
+
+        /* FOOTER */
+        #footer { padding: 15px; color: #f4f6fd; font-size: 13px; position: fixed; left: 0; bottom: 0; width: 300px; z-index: 9999; background: #040b14; text-align: center; }
+
+        @media (max-width: 1199px) {
+            #header, #footer { left: -300px; }
+            #header.header-show, #footer.footer-show { left: 0; }
+            #main { margin-left: 0; }
+            #hero .hero-container { padding-left: 20px; }
+            .mobile-nav-toggle { display: flex; }
+        }
+        @media (max-width: 768px) {
+            .skills-grid { grid-template-columns: 1fr; }
+            #hero h1 { font-size: 38px; }
+            .hero-profile-img { width: 120px; height: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="mobile-nav-toggle" id="mobileNavToggle"><i class="fa-solid fa-bars"></i></button>
+
+    <!-- SIDEBAR -->
+    <header id="header">
+        <div class="profile">
+            <img src="../belajar-html-hafizh.html/IMAGE/Screenshot 2026-09-08 124233.png" alt="Profile" class="img-fluid">
+            <h1>Santri Dev</h1>
+            <div class="social-links">
+                <a href="https://wa.me/6285188318586" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://instagram.com/kanghfidzzz" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Beranda</a></li>
+                <li><a href="#about" class="nav-link"><i class="fa-solid fa-user"></i> Tentang Saya</a></li>
+                <li><a href="#services" class="nav-link"><i class="fa-solid fa-concierge-bell"></i> Layanan</a></li>
+                <li><a href="#skills" class="nav-link"><i class="fa-solid fa-code"></i> Keahlian</a></li>
+                <li><a href="#projects" class="nav-link"><i class="fa-solid fa-folder-open"></i> Portfolio</a></li>
+                <li><a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <footer id="footer">
+        &copy; 2026 <strong>Santri Developer</strong>
+    </footer>
+
+    <!-- HERO WITH PROFILE IMAGE & TYPED EFEK -->
+    <section id="hero">
+        <div class="hero-container">
+            <!-- FOTO PROFIL LINGKARAN HERO -->
+            <img src="../belajar-html-hafizh.html/IMAGE/Screenshot 2026-09-08 124233.png" alt="Santri Dev" class="hero-profile-img">
+            
+            <h1>Santri Developer</h1>
+            <p>Saya Seorang <span class="typed" data-typed-items="Web Developer., Santri Pondok Pesantren Subulul Huda., Pengkaji Kitab Turats., EdTech Enthusiast."></span></p>
+            <div class="tag-cloud">
+                <span class="tag-badge">#KitabKuningPower</span>
+                <span class="tag-badge">#KodingIstimewa</span>
+                <span class="tag-badge">#PejuangIlmu</span>
+            </div>
+        </div>
+    </section>
+
+    <main id="main">
+
+        <!-- ABOUT -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Tentang Saya</h2>
+                    <p>Selamat datang di ruang digital saya! Saya adalah kombinasi antara pengkaji literatur Islam klasik (Kitab Kuning) dan pengembang perangkat lunak modern.</p>
+                </div>
+
+                <h3>Web Developer &amp; Pengkaji Kitab Turats</h3>
+                <p style="margin-top: 10px;">
+                    Saya mendedikasikan waktu saya untuk mendalami Fiqih Lintas Madzhab, Tasawuf, serta tata bahasa Arab (Nahwu & Sharaf). Di sisi lain, saya terus mengasah kreativitas dalam dunia koding untuk menciptakan media pembelajaran digital yang intuitif, cepat, dan bermanfaat luas.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-item"><i class="fa-solid fa-angle-right"></i> <strong>Nama:</strong>&nbsp; Kang Hafidz</div>
+                    <div class="info-item"><i class="fa-solid fa-angle-right"></i> <strong>Status:</strong>&nbsp; Santri Aktif & Freelancer</div>
+                    <div class="info-item"><i class="fa-solid fa-angle-right"></i> <strong>Fokus:</strong>&nbsp; Web Design & EdTech Pesantren</div>
+                    <div class="info-item"><i class="fa-solid fa-angle-right"></i> <strong>Kajian:</strong>&nbsp; Fiqih & Tasawuf</div>
+                    <div class="info-item"><i class="fa-solid fa-angle-right"></i> <strong>WhatsApp:</strong>&nbsp; +62 851-8831-8586</div>
+                    <div class="info-item"><i class="fa-solid fa-angle-right"></i> <strong>Instagram:</strong>&nbsp; @kanghfidzzz</div>
+                </div>
+
+                <p>
+                    📌 <strong>Belajar Bareng:</strong> Terbuka untuk diskusi fiqih, belajar kitab kuning bareng, atau sekadar bertukar pikiran seputar koding. Jangan ragu buat kontak lewat WhatsApp atau DM Instagram!
+                </p>
+            </div>
+        </section>
+
+        <!-- STATS ANIMATED COUNTER -->
+        <section class="facts section-bg">
+            <div class="container">
+                <div class="facts-grid">
+                    <div class="fact-box">
+                        <i class="fa-solid fa-laptop-code"></i>
+                        <div><span class="counter" data-target="15">0</span>+</div>
+                        <p>Project Selesai</p>
+                    </div>
+                    <div class="fact-box">
+                        <i class="fa-solid fa-book-quran"></i>
+                        <div><span class="counter" data-target="10">0</span>+</div>
+                        <p>Kitab Dikaji</p>
+                    </div>
+                    <div class="fact-box">
+                        <i class="fa-solid fa-clock"></i>
+                        <div><span class="counter" data-target="1200">0</span>+</div>
+                        <p>Jam Koding</p>
+                    </div>
+                    <div class="fact-box">
+                        <i class="fa-solid fa-comments"></i>
+                        <div><span class="counter" data-target="100">0</span>%</div>
+                        <p>Semangat Ngaji</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Layanan & Aktivitas</h2>
+                    <p>Hal-hal yang biasa saya kerjakan dan siap bantu untuk kamu:</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="icon-box">
+                        <div class="icon"><i class="fa-solid fa-code"></i></div>
+                        <h4>Web Development</h4>
+                        <p>Membangun landing page, portfolio, dan website interaktif yang responsif dan modern.</p>
+                    </div>
+                    <div class="icon-box">
+                        <div class="icon"><i class="fa-solid fa-book-open"></i></div>
+                        <h4>Ngaji Kitab Kuning</h4>
+                        <p>Diskusi dan belajar bersama mengenai kitab-kitab turats, fiqih lintas madzhab, & tasawuf.</p>
+                    </div>
+                    <div class="icon-box">
+                        <div class="icon"><i class="fa-solid fa-pen-nib"></i></div>
+                        <h4>Desain & Layout</h4>
+                        <p>Pembuatan desain cover buku digital, layout materi pembelajaran, dan konten media sosial.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="skills section-bg">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Keahlian</h2>
+                    <p>Tingkat penguasaan dalam pemrograman web dan keilmuan pesantren:</p>
+                </div>
+
+                <div class="skills-grid">
+                    <div>
+                        <div class="progress">
+                            <div class="skill">HTML & CSS <span>90%</span></div>
+                            <div class="progress-bar-wrap"><div class="progress-bar" data-width="90%"></div></div>
+                        </div>
+                        <div class="progress">
+                            <div class="skill">JavaScript <span>75%</span></div>
+                            <div class="progress-bar-wrap"><div class="progress-bar" data-width="75%"></div></div>
+                        </div>
+                        <div class="progress">
+                            <div class="skill">Mengajar & Sharing <span>85%</span></div>
+                            <div class="progress-bar-wrap"><div class="progress-bar" data-width="85%"></div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="progress">
+                            <div class="skill">Baca Kitab Kuning <span>90%</span></div>
+                            <div class="progress-bar-wrap"><div class="progress-bar" data-width="90%"></div></div>
+                        </div>
+                        <div class="progress">
+                            <div class="skill">Fiqih Lintas Madzhab <span>80%</span></div>
+                            <div class="progress-bar-wrap"><div class="progress-bar" data-width="80%"></div></div>
+                        </div>
+                        <div class="progress">
+                            <div class="skill">Tasawuf & Akhlak <span>85%</span></div>
+                            <div class="progress-bar-wrap"><div class="progress-bar" data-width="85%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Projects Terbaru</h2>
+                    <p>Beberapa karya yang pernah saya kembangkan:</p>
+                </div>
+
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <div class="portfolio-img" style="background-image: url('project1.jpg');"></div>
+                        <div class="portfolio-info">
+                            <h4>Website Portfolio</h4>
+                            <p>Website personal modern dengan Sidebar Navigasi khas iPortfolio.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="portfolio-img" style="background-image: url('project2.jpg');"></div>
+                        <div class="portfolio-info">
+                            <h4>Landing Page Edukasi</h4>
+                            <p>Halaman promosi interaktif untuk program belajar dan media digital.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="portfolio-img" style="background-image: url('project3.jpg');"></div>
+                        <div class="portfolio-info">
+                            <h4>Desain Kitab & Buku</h4>
+                            <p>Layout rapi dan artistik untuk buku digital serta sampul naskah turats.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="contact section-bg">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Hubungi Saya</h2>
+                    <p>Ada project web atau mau diajak ngaji bareng? Kontak via media sosial berikut:</p>
+                </div>
+
+                <div class="info-box">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <div>
+                        <h4>WhatsApp:</h4>
+                        <p><a href="https://wa.me/6285188318586" target="_blank">Chat Via WhatsApp (+62 851-8831-8586)</a></p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <i class="fa-brands fa-instagram"></i>
+                    <div>
+                        <h4>Instagram:</h4>
+                        <p><a href="https://instagram.com/kanghfidzzz" target="_blank">@kanghfidzzz</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT DINAMIS -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const toggleBtn = document.getElementById('mobileNavToggle');
+        const header = document.getElementById('header');
+        const footer = document.getElementById('footer');
+
+        toggleBtn.addEventListener('click', () => {
+            header.classList.toggle('header-show');
+            footer.classList.toggle('footer-show');
+            toggleBtn.querySelector('i').classList.toggle('fa-bars');
+            toggleBtn.querySelector('i').classList.toggle('fa-xmark');
+        });
+
+        // 2. Typed Effect (Efek Ketik Otomatis)
+        const selectTyped = document.querySelector('.typed');
+        if (selectTyped) {
+            let typed_items = selectTyped.getAttribute('data-typed-items').split(',');
+            new Typed('.typed', {
+                strings: typed_items,
+                loop: true,
+                typeSpeed: 80,
+                backSpeed: 50,
+                backDelay: 2000
+            });
+        }
+
+        // 3. Counter Animation
+        let animatedCounter = false;
+        function startCounter() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const speed = 200;
+                const updateCount = () => {
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // 4. Scroll Interactivity
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+
+            const skillsSec = document.getElementById('skills');
+            if (skillsSec.getBoundingClientRect().top < window.innerHeight / 1.2) {
+                document.querySelectorAll('.progress-bar').forEach(bar => {
+                    bar.style.width = bar.dataset.width;
+                });
+            }
+
+            const factsSec = document.querySelector('.facts');
+            if (factsSec.getBoundingClientRect().top < window.innerHeight / 1.2 && !animatedCounter) {
+                startCounter();
+                animatedCounter = true;
+            }
+        });
+    </script>
+</body>
+</html>
